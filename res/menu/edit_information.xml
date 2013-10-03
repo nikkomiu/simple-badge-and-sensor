@@ -1,6 +1,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item
+        android:id="@+id/menuEditCancelButton"
+        android:orderInCategory="100"
+        android:showAsAction="always"
+        android:title="@string/cancelSaveInformation" />
+    
+		<item
+		    android:id="@+id/menuEditSubmitButton"
+		    android:orderInCategory="100"
+		    android:showAsAction="always"
+		    android:title="@string/saveInformation" />
+    
+    <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
         android:showAsAction="never"

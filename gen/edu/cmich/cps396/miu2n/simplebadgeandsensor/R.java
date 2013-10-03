@@ -8,6 +8,9 @@
 package edu.cmich.cps396.miu2n.simplebadgeandsensor;
 
 public final class R {
+    public static final class array {
+        public static final int select_photo_location=0x7f070000;
+    }
     public static final class attr {
     }
     public static final class color {
@@ -27,37 +30,53 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int action_settings=0x7f090008;
-        public static final int choosePhoto=0x7f090002;
-        public static final int contactBadge=0x7f090000;
-        public static final int editSubmitButton=0x7f090005;
-        public static final int edit_information_menu_item=0x7f090009;
-        public static final int extraInfo=0x7f090004;
-        public static final int nameField=0x7f090003;
-        public static final int showContactBadge=0x7f090007;
-        public static final int takePhoto=0x7f090001;
-        public static final int testButton=0x7f090006;
+        public static final int action_settings=0x7f0a0011;
+        public static final int button1=0x7f0a000d;
+        public static final int button2=0x7f0a000e;
+        public static final int contactBadge=0x7f0a0000;
+        public static final int editNameLabel=0x7f0a0001;
+        public static final int editPostalLabel=0x7f0a0003;
+        public static final int edit_information_menu_item=0x7f0a0012;
+        public static final int extraInfo=0x7f0a0006;
+        public static final int menuEditCancelButton=0x7f0a000f;
+        public static final int menuEditSubmitButton=0x7f0a0010;
+        public static final int nameField=0x7f0a0002;
+        public static final int postalField=0x7f0a0004;
+        public static final int showContactBadge=0x7f0a0007;
+        public static final int showExtraInfo=0x7f0a000c;
+        public static final int showExtraInfoLabel=0x7f0a0005;
+        public static final int showNameField=0x7f0a0009;
+        public static final int showNameLabel=0x7f0a0008;
+        public static final int showPostalField=0x7f0a000b;
+        public static final int showPostalLabel=0x7f0a000a;
     }
     public static final class layout {
         public static final int activity_edit_information=0x7f030000;
         public static final int activity_show_information=0x7f030001;
+        public static final int photo_source_selection_helper=0x7f030002;
     }
     public static final class menu {
-        public static final int edit_information=0x7f080000;
-        public static final int show_information=0x7f080001;
+        public static final int edit_information=0x7f090000;
+        public static final int show_information=0x7f090001;
     }
     public static final class string {
         public static final int action_settings=0x7f050001;
         public static final int app_name=0x7f050000;
+        public static final int cancelSaveInformation=0x7f050008;
         public static final int choose_photo=0x7f050004;
         public static final int hello_world=0x7f050002;
-        public static final int hintExtraInfo=0x7f050009;
-        public static final int hintNameField=0x7f050008;
+        public static final int hintExtraInfo=0x7f05000a;
+        public static final int hintNameField=0x7f050009;
+        public static final int hintPostalField=0x7f05000d;
+        public static final int image_filename=0x7f05000c;
         public static final int saveInformation=0x7f050007;
+        public static final int saved_changes=0x7f05000b;
+        public static final int select_photo_dialog_title=0x7f050010;
         public static final int take_photo=0x7f050003;
-        public static final int testing=0x7f05000a;
+        public static final int testing=0x7f05000f;
         public static final int title_activity_edit_information=0x7f050005;
         public static final int title_activity_show_information=0x7f050006;
+        public static final int undefinedField=0x7f05000e;
     }
     public static final class style {
         /** 
@@ -81,10 +100,10 @@ public final class R {
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f070000;
+        public static final int AppBaseTheme=0x7f080000;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f070001;
+        public static final int AppTheme=0x7f080001;
     }
 }

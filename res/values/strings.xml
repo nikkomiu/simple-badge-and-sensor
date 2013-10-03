@@ -8,12 +8,23 @@
     <string name="choose_photo">Choose</string>
     <string name="title_activity_edit_information">Edit Information</string>
     <string name="title_activity_show_information">Show Information</string>
-    <string name="saveInformation">Save Information</string>
+    <string name="saveInformation">Save</string>
+    <string name="cancelSaveInformation">Cancel</string>
     <string name="hintNameField">Name</string>
     <string name="hintExtraInfo">Extra Information</string>
+    <string name="saved_changes">Successfully Saved Changes!</string>
+    <string name="image_filename">user_img.jpg</string>
+    <string name="hintPostalField">Address</string>
+    <string name="undefinedField">(None Specified)</string>
     
 		<string name="testing">Testing Button</string>
     
     <color name="white">#FFFFFF</color>
-	
+    
+    <string name="select_photo_dialog_title">Set Photo</string>
+    <string-array name="select_photo_location">
+        <item>Take New Photo</item>
+        <item>Choose Existing Photo</item>
+    </string-array>
+    
 </resources>
