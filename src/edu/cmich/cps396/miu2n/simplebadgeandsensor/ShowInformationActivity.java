@@ -1,24 +1,27 @@
 package edu.cmich.cps396.miu2n.simplebadgeandsensor;
 
+import java.io.File;
+import java.util.Scanner;
+
+import org.json.JSONObject;
+
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
-import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.QuickContactBadge;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ShowInformationActivity extends Activity {
 	
-	private SharedPreferences user;
+	private String location;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +29,11 @@ public class ShowInformationActivity extends Activity {
 		setContentView(R.layout.activity_show_information);
 		
 		setupActivity();
+		
+	    Intent intent = new Intent(this, LocationService.class);
+		intent.putExtra("location", location);
+		
+		startService(intent);
 	}
 
 	@Override
@@ -41,13 +49,24 @@ public class ShowInformationActivity extends Activity {
 		getMenuInflater().inflate(R.menu.show_information, menu);
 		
 		// Sets the Menu Option for Editing Information
-		MenuItem item = menu.findItem(R.id.edit_information_menu_item);
-		item.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+		MenuItem editInfo = menu.findItem(R.id.edit_information_menu_item);
+		editInfo.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			public boolean onMenuItemClick(MenuItem clickedItem) {
                 Intent i = new Intent(ShowInformationActivity.this, EditInformationActivity.class);
                 startActivity(i);
-                return true;
+                return false;
             }
+		});
+		
+		MenuItem deleteLocation = menu.findItem(R.id.showDeleteLocation);
+		deleteLocation.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+			@Override
+			public boolean onMenuItemClick(MenuItem arg0) {
+				File f = new File(getFilesDir(), "location.json");
+				f.delete();
+				Toast.makeText(getApplicationContext(), "Deleted Location Information", Toast.LENGTH_LONG).show();
+				return false;
+			}
 		});
 		return true;
 	}
@@ -73,36 +92,31 @@ public class ShowInformationActivity extends Activity {
 		}
 	}
 	
-	protected void setupActivity() {
-		if ((user = getSharedPreferences("user", 0)) == null || user.contains("name") == false || user.contains("extra") == false) {
+	private void setupActivity() {
+		try {
+			QuickContactBadge badge = (QuickContactBadge) findViewById(R.id.showContactBadge);
+			TextView name = (TextView) findViewById(R.id.showNameField);
+			TextView postal = (TextView) findViewById(R.id.showPostalField);
+			TextView extra = (TextView) findViewById(R.id.showExtraInfo);
+			
+			String fileString = "";
+			Scanner file = new Scanner(openFileInput("info.json"));
+			
+			while(file.hasNextLine())
+				fileString += file.nextLine();
+			file.close();
+			
+			JSONObject obj = new JSONObject(fileString);
+			
+			location = obj.getString("postal");
+			
+			name.setText(obj.getString("name"));
+			postal.setText(obj.getString("postal"));
+			extra.setText(obj.getString("extra"));
+			badge.setImageBitmap(BitmapFactory.decodeFile(Uri.fromFile(new File(obj.getString("image_uri"))).getPath()));
+		} catch (Exception e) {
 			Intent i = new Intent(this, EditInformationActivity.class);
 			startActivity(i);
 		}
-
-		TextView name = (TextView) findViewById(R.id.showNameField);
-		name.setText(user.getString("name", ""));
-		
-		TextView postal = (TextView) findViewById(R.id.showPostalField);
-		postal.setText(user.getString("postal", ""));
-		
-		TextView extra = (TextView) findViewById(R.id.showExtraInfo);
-		extra.setText(user.getString("extra", ""));
-		
-		QuickContactBadge badge = (QuickContactBadge) findViewById(R.id.showContactBadge);
-		try {
-			if (user.getBoolean("external", false)) {
-				badge.setImageBitmap(MediaStore.Images.Media.getBitmap(this.getContentResolver(), Uri.parse(user.getString("image_uri", ""))));
-			} else {
-				badge.setImageBitmap(BitmapFactory.decodeFile(getFilesDir().toString() + "/" + getString(R.string.image_filename)));
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		badge.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View arg0) {
-				
-			}
-		});
 	}
 }
