@@ -33,7 +33,8 @@
         </activity>
 
         <service
-            android:name="edu.cmich.cps396.miu2n.simplebadgeandsensor.LocationService"
+            android:name=".LocationService"
+            android:process=":bg_process"
             android:exported="false" >
         </service>
     </application>

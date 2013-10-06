@@ -19,6 +19,7 @@
     <string name="image_filename">user_img.jpg</string>
     <string name="user_info_filename">user_info.json</string>
     <string name="select_photo_dialog_title">Set Photo</string>
+    <string name="image_view_description"></string>
 
     <string-array name="select_photo_location">
         <item>Take New Photo</item>

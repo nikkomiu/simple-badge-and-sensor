@@ -14,6 +14,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.BitmapFactory;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,12 +22,13 @@ import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
-import android.widget.QuickContactBadge;
+import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 public class EditInformationActivity extends Activity {
 	
-	QuickContactBadge badge;
+	ImageView badge;
 	private EditText name;
 	private EditText extra;
 	private EditText postal;
@@ -37,7 +39,7 @@ public class EditInformationActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_edit_information);
 		
-		badge = (QuickContactBadge) findViewById(R.id.contactBadge);
+		badge = (ImageView) findViewById(R.id.contactBadge);
 		name = (EditText) findViewById(R.id.nameField);
 		postal = (EditText) findViewById(R.id.postalField);
 		extra = (EditText) findViewById(R.id.extraInfo);
@@ -62,6 +64,9 @@ public class EditInformationActivity extends Activity {
 		} catch (Exception e) {
 			// Do nothing (file probably doesn't exist)...
 		}
+		
+		ScrollView scrollView = (ScrollView) findViewById(R.id.editScrollView);
+		scrollView.smoothScrollBy(0, 100);
 		
 		setupBadgeOnClick();
 	}
@@ -171,8 +176,24 @@ public class EditInformationActivity extends Activity {
 
 		try {
 			if (resultCode == RESULT_OK) {
-				if (requestCode == 4712)
-					pictureUri = data.getData();
+				if (requestCode == 4712) {
+					// Got code block from:
+					// http://stackoverflow.com/questions/2507898/how-to-pick-an-image-from-gallery-sd-card-for-my-app-in-android
+					
+					// Begin Code Block
+					Uri selectedImage = data.getData();
+		            String[] filePathColumn = {MediaStore.Images.Media.DATA};
+
+		            Cursor cursor = getContentResolver().query(selectedImage, filePathColumn, null, null, null);
+		            cursor.moveToFirst();
+
+		            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+		            String filePath = cursor.getString(columnIndex);
+		            cursor.close();
+		            // End Code Block
+					
+		            pictureUri = Uri.parse(filePath);
+				}
 				if (requestCode == 4711 || requestCode == 4712)
 					setImageBitmap();
 			}

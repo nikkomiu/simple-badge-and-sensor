@@ -39,24 +39,26 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int contactBadge=0x7f0a0000;
-        public static final int editDeleteLocation=0x7f0a000f;
-        public static final int editNameLabel=0x7f0a0001;
-        public static final int editPostalLabel=0x7f0a0003;
-        public static final int edit_information_menu_item=0x7f0a0010;
-        public static final int extraInfo=0x7f0a0006;
-        public static final int menuEditCancelButton=0x7f0a000d;
-        public static final int menuEditSubmitButton=0x7f0a000e;
-        public static final int nameField=0x7f0a0002;
-        public static final int postalField=0x7f0a0004;
-        public static final int showContactBadge=0x7f0a0007;
-        public static final int showDeleteLocation=0x7f0a0011;
-        public static final int showExtraInfo=0x7f0a000c;
-        public static final int showExtraInfoLabel=0x7f0a0005;
-        public static final int showNameField=0x7f0a0009;
-        public static final int showNameLabel=0x7f0a0008;
-        public static final int showPostalField=0x7f0a000b;
-        public static final int showPostalLabel=0x7f0a000a;
+        public static final int contactBadge=0x7f0a0001;
+        public static final int editDeleteLocation=0x7f0a0011;
+        public static final int editNameLabel=0x7f0a0002;
+        public static final int editPostalLabel=0x7f0a0004;
+        public static final int editScrollView=0x7f0a0000;
+        public static final int edit_information_menu_item=0x7f0a0012;
+        public static final int extraInfo=0x7f0a0007;
+        public static final int menuEditCancelButton=0x7f0a000f;
+        public static final int menuEditSubmitButton=0x7f0a0010;
+        public static final int nameField=0x7f0a0003;
+        public static final int postalField=0x7f0a0005;
+        public static final int showContactBadge=0x7f0a0009;
+        public static final int showDeleteLocation=0x7f0a0013;
+        public static final int showExtraInfo=0x7f0a000e;
+        public static final int showExtraInfoLabel=0x7f0a0006;
+        public static final int showNameField=0x7f0a000b;
+        public static final int showNameLabel=0x7f0a000a;
+        public static final int showPostalField=0x7f0a000d;
+        public static final int showPostalLabel=0x7f0a000c;
+        public static final int viewScrollView=0x7f0a0008;
     }
     public static final class layout {
         public static final int activity_edit_information=0x7f030000;
@@ -76,6 +78,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int hintNameField=0x7f06000a;
         public static final int hintPostalField=0x7f06000b;
         public static final int image_filename=0x7f06000f;
+        public static final int image_view_description=0x7f060012;
         public static final int saveInformation=0x7f060007;
         public static final int saved_changes=0x7f060009;
         public static final int select_photo_dialog_title=0x7f060011;

@@ -3,6 +3,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/viewScrollView"
     tools:context=".ShowInformationActivity" >
     
     <LinearLayout
@@ -14,66 +15,67 @@
 			  android:paddingRight="@dimen/activity_horizontal_margin"
 			  android:paddingTop="@dimen/activity_vertical_margin" >
     
-    <QuickContactBadge
-		    android:id="@+id/showContactBadge"
-		    android:layout_width="200dip"
-		    android:layout_height="260dip"
-		    android:layout_gravity="center_horizontal"
-		    android:layout_marginTop="4dp"
-		    android:background="@color/white"
-		    android:padding="8dp" />
-
-    <TextView
-        android:id="@+id/showNameLabel"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="16dp"
-        android:ems="10"
-        android:text="@string/hintNameField"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
-    
-    <TextView
-        android:id="@+id/showNameField"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/undefinedField"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-    
-    <TextView
-        android:id="@+id/showPostalLabel"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="16dp"
-        android:ems="10"
-        android:text="@string/hintPostalField"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
-
-    <TextView
-        android:id="@+id/showPostalField"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/undefinedField"
-        android:ems="10"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <TextView
-        android:id="@+id/showExtraInfoLabel"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="16dp"
-        android:ems="10"
-        android:text="@string/hintExtraInfo"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
-    
-    <TextView
-        android:id="@+id/showExtraInfo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/undefinedField"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-    
+		    <ImageView
+				    android:id="@+id/showContactBadge"
+				    android:layout_width="200dip"
+				    android:layout_height="260dip"
+				    android:layout_gravity="center_horizontal"
+				    android:layout_marginTop="4dp"
+				    android:background="@color/white"
+				    android:padding="8dp"
+				    android:contentDescription="@string/image_view_description" />
+		
+		    <TextView
+		        android:id="@+id/showNameLabel"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:paddingTop="16dp"
+		        android:ems="10"
+		        android:text="@string/hintNameField"
+		        android:textAppearance="?android:attr/textAppearanceSmall" />
+		    
+		    <TextView
+		        android:id="@+id/showNameField"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:ems="10"
+		        android:hint="@string/undefinedField"
+		        android:textAppearance="?android:attr/textAppearanceMedium" />
+		    
+		    <TextView
+		        android:id="@+id/showPostalLabel"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:paddingTop="16dp"
+		        android:ems="10"
+		        android:text="@string/hintPostalField"
+		        android:textAppearance="?android:attr/textAppearanceSmall" />
+		
+		    <TextView
+		        android:id="@+id/showPostalField"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:hint="@string/undefinedField"
+		        android:ems="10"
+		        android:textAppearance="?android:attr/textAppearanceMedium" />
+		
+		    <TextView
+		        android:id="@+id/showExtraInfoLabel"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:paddingTop="16dp"
+		        android:ems="10"
+		        android:text="@string/hintExtraInfo"
+		        android:textAppearance="?android:attr/textAppearanceSmall" />
+		    
+		    <TextView
+		        android:id="@+id/showExtraInfo"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:ems="10"
+		        android:hint="@string/undefinedField"
+		        android:textAppearance="?android:attr/textAppearanceMedium" />
+		    
     </LinearLayout>
     
 </ScrollView>

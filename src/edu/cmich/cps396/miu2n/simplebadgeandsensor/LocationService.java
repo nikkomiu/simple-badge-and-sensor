@@ -1,5 +1,6 @@
 package edu.cmich.cps396.miu2n.simplebadgeandsensor;
 
+import java.io.File;
 import java.io.PrintWriter;
 import java.util.Locale;
 import java.util.Scanner;
@@ -12,11 +13,13 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
@@ -99,19 +102,25 @@ public class LocationService extends Service {
     		    Notification builder = null;
     		    
     		    if (distance[0] < 1000 && prevDistance[0] > 1000) {
+    		    	JSONObject obj = ShowInformationActivity.getJSONData(getApplicationContext());
+    		    	
 	    		    builder = new NotificationCompat.Builder(getApplicationContext())
 	    		    .setContentTitle("Moved Inside Range")
 	    			.setContentText("You have moved inside of 1000 Meters of your address")
 	    			.setContentIntent(pi)
+	    			.setLargeIcon(BitmapFactory.decodeFile(Uri.fromFile(new File(obj.getString("image_uri"))).getPath()))
 	    			.setSmallIcon(R.drawable.ic_launcher)
 	    			.build();
     		    }
     		    
     		    if (distance[0] > 1000 && prevDistance[0] < 1000) {
+    		    	JSONObject obj = ShowInformationActivity.getJSONData(getApplicationContext());
+    		    	
     		    	builder = new NotificationCompat.Builder(getApplicationContext())
 	    		    .setContentTitle("Moved Outside Range")
 	    			.setContentText("You have moved outside of 1000 Meters of your address")
 	    			.setContentIntent(pi)
+	    			.setLargeIcon(BitmapFactory.decodeFile(Uri.fromFile(new File(obj.getString("image_uri"))).getPath()))
 	    			.setSmallIcon(R.drawable.ic_launcher)
 	    			.build();
     		    }

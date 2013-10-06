@@ -9,13 +9,15 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
-import android.widget.QuickContactBadge;
+import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +36,9 @@ public class ShowInformationActivity extends Activity {
 		intent.putExtra("location", location);
 		
 		startService(intent);
+		
+		ScrollView scrollView = (ScrollView) findViewById(R.id.viewScrollView);
+		scrollView.smoothScrollBy(0, 100);
 	}
 
 	@Override
@@ -75,7 +80,7 @@ public class ShowInformationActivity extends Activity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 
-		QuickContactBadge badge = (QuickContactBadge) findViewById(R.id.contactBadge);
+		ImageView badge = (ImageView) findViewById(R.id.contactBadge);
 		
 		try {
 			if (resultCode == RESULT_OK) {
@@ -92,15 +97,10 @@ public class ShowInformationActivity extends Activity {
 		}
 	}
 	
-	private void setupActivity() {
+	public static JSONObject getJSONData(Context context) {
 		try {
-			QuickContactBadge badge = (QuickContactBadge) findViewById(R.id.showContactBadge);
-			TextView name = (TextView) findViewById(R.id.showNameField);
-			TextView postal = (TextView) findViewById(R.id.showPostalField);
-			TextView extra = (TextView) findViewById(R.id.showExtraInfo);
-			
 			String fileString = "";
-			Scanner file = new Scanner(openFileInput("info.json"));
+			Scanner file = new Scanner(context.openFileInput("info.json"));
 			
 			while(file.hasNextLine())
 				fileString += file.nextLine();
@@ -108,11 +108,27 @@ public class ShowInformationActivity extends Activity {
 			
 			JSONObject obj = new JSONObject(fileString);
 			
+			return obj;
+		} catch (Exception e) {
+			return null;
+		}
+	}
+	
+	private void setupActivity() {
+		try {
+			ImageView badge = (ImageView) findViewById(R.id.showContactBadge);
+			TextView name = (TextView) findViewById(R.id.showNameField);
+			TextView postal = (TextView) findViewById(R.id.showPostalField);
+			TextView extra = (TextView) findViewById(R.id.showExtraInfo);
+			
+			JSONObject obj = getJSONData(this);
+			
 			location = obj.getString("postal");
 			
 			name.setText(obj.getString("name"));
 			postal.setText(obj.getString("postal"));
 			extra.setText(obj.getString("extra"));
+			
 			badge.setImageBitmap(BitmapFactory.decodeFile(Uri.fromFile(new File(obj.getString("image_uri"))).getPath()));
 		} catch (Exception e) {
 			Intent i = new Intent(this, EditInformationActivity.class);
