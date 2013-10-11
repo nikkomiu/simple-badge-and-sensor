@@ -2,7 +2,6 @@ package edu.cmich.cps396.miu2n.simplebadgeandsensor;
 
 import java.io.File;
 import java.io.PrintWriter;
-import java.util.Scanner;
 
 import org.json.JSONObject;
 
@@ -15,7 +14,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.BitmapFactory;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
@@ -45,14 +43,7 @@ public class EditInformationActivity extends Activity {
 		extra = (EditText) findViewById(R.id.extraInfo);
 		
 		try {
-			String fileString = "";
-			Scanner file = new Scanner(openFileInput("info.json"));
-			
-			while(file.hasNextLine())
-				fileString += file.nextLine();
-			file.close();
-			
-			JSONObject obj = new JSONObject(fileString);
+			JSONObject obj = GeneralFunctions.getJSONData(this, "info.json");
 			
 			name.setText(obj.getString("name"));
 			postal.setText(obj.getString("postal"));
@@ -60,9 +51,11 @@ public class EditInformationActivity extends Activity {
 			
 			pictureUri = Uri.fromFile(new File(obj.getString("image_uri")));
 			
-			setImageBitmap();
+			GeneralFunctions.setImage(this, badge, pictureUri.getPath());
 		} catch (Exception e) {
-			// Do nothing (file probably doesn't exist)...
+			// (file probably doesn't exist)
+			badge.getLayoutParams().width = 300;
+			badge.getLayoutParams().height = 400;
 		}
 		
 		ScrollView scrollView = (ScrollView) findViewById(R.id.editScrollView);
@@ -113,10 +106,6 @@ public class EditInformationActivity extends Activity {
 				.show();
 			}
 		});
-	}
-	
-	private void setImageBitmap() {
-		badge.setImageBitmap(BitmapFactory.decodeFile(pictureUri.getPath()));
 	}
 	
 	@Override
@@ -195,7 +184,7 @@ public class EditInformationActivity extends Activity {
 		            pictureUri = Uri.parse(filePath);
 				}
 				if (requestCode == 4711 || requestCode == 4712)
-					setImageBitmap();
+					GeneralFunctions.setImage(this, badge, pictureUri.getPath());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

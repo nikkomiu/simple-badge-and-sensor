@@ -23,6 +23,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
+import android.util.Log;
 import android.widget.Toast;
 
 
@@ -102,7 +103,7 @@ public class LocationService extends Service {
     		    Notification builder = null;
     		    
     		    if (distance[0] < 1000 && prevDistance[0] > 1000) {
-    		    	JSONObject obj = ShowInformationActivity.getJSONData(getApplicationContext());
+    		    	JSONObject obj = GeneralFunctions.getJSONData(getApplicationContext(), "location.json");
     		    	
 	    		    builder = new NotificationCompat.Builder(getApplicationContext())
 	    		    .setContentTitle("Moved Inside Range")
@@ -114,7 +115,7 @@ public class LocationService extends Service {
     		    }
     		    
     		    if (distance[0] > 1000 && prevDistance[0] < 1000) {
-    		    	JSONObject obj = ShowInformationActivity.getJSONData(getApplicationContext());
+    		    	JSONObject obj = GeneralFunctions.getJSONData(getApplicationContext(), "location.json");
     		    	
     		    	builder = new NotificationCompat.Builder(getApplicationContext())
 	    		    .setContentTitle("Moved Outside Range")
@@ -134,7 +135,7 @@ public class LocationService extends Service {
     		    
     			Toast.makeText(getApplicationContext(), "Distance: ~" + (int) distance[0] + " Meters from Address", Toast.LENGTH_LONG).show();
             } catch (Exception e) {
-            	e.getStackTrace();
+            	Log.e("onLocationChange()", e.getMessage());
             }
             
             sendBroadcast(intent);
@@ -169,7 +170,7 @@ public class LocationService extends Service {
 				writer.print(obj.toString());
 				writer.close();
 			} catch (Exception e) {
-				e.printStackTrace();
+				Log.e("locationDataToJson()", e.getMessage());
 			}
 		}
 	

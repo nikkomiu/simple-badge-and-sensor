@@ -1,18 +1,15 @@
 package edu.cmich.cps396.miu2n.simplebadgeandsensor;
 
 import java.io.File;
-import java.util.Scanner;
 
 import org.json.JSONObject;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
@@ -93,24 +90,7 @@ public class ShowInformationActivity extends Activity {
 				}
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public static JSONObject getJSONData(Context context) {
-		try {
-			String fileString = "";
-			Scanner file = new Scanner(context.openFileInput("info.json"));
-			
-			while(file.hasNextLine())
-				fileString += file.nextLine();
-			file.close();
-			
-			JSONObject obj = new JSONObject(fileString);
-			
-			return obj;
-		} catch (Exception e) {
-			return null;
+			Log.e("onActivityResult()", e.getMessage());
 		}
 	}
 	
@@ -121,7 +101,7 @@ public class ShowInformationActivity extends Activity {
 			TextView postal = (TextView) findViewById(R.id.showPostalField);
 			TextView extra = (TextView) findViewById(R.id.showExtraInfo);
 			
-			JSONObject obj = getJSONData(this);
+			JSONObject obj = GeneralFunctions.getJSONData(this, "info.json");
 			
 			location = obj.getString("postal");
 			
@@ -129,7 +109,7 @@ public class ShowInformationActivity extends Activity {
 			postal.setText(obj.getString("postal"));
 			extra.setText(obj.getString("extra"));
 			
-			badge.setImageBitmap(BitmapFactory.decodeFile(Uri.fromFile(new File(obj.getString("image_uri"))).getPath()));
+			GeneralFunctions.setImage(this, badge, obj.getString("image_uri"));
 		} catch (Exception e) {
 			Intent i = new Intent(this, EditInformationActivity.class);
 			startActivity(i);
